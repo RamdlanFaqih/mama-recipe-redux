@@ -1,0 +1,46 @@
+#allContent {
+    margin-top: 100px;
+}
+
+
+#titleContent {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+    margin-bottom: 100px;
+    color: #2E266F;
+}
+#titleContent h1{
+    margin-bottom: 70px;
+}
+
+#titleContent img {
+    width: 1002px;
+}
+
+#sectionIngredients {
+    margin-bottom: 100px;
+}
+
+#videoStep {
+    margin-bottom: 100px;
+    width: 40%;
+}
+
+#video-step .video-button {
+}
+
+
+#sectionComment {
+    margin-bottom: 100px;
+   
+}
+
+#comment-type {
+  
+}
+#buttonSend {
+    margin-top: 40px;
+    width: 30%;
+}

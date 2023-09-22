@@ -1,0 +1,29 @@
+footer {
+    background-color: #efc81a;
+    height: 100vh;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer-section {
+    margin-bottom: 100px;
+}
+
+#footer-section h1 {
+    font-size: 72px;
+    font-weight: lighter;
+    color: #2E266F;
+}
+
+#footer-section p {
+    margin-top: 61px;
+    font-size: 24px;
+    font-weight: lighter;
+    color: #707070;
+}
+
+#footer-nav .nav-link {
+    color: #707070;
+    font-size: 16px;
+}

@@ -1,0 +1,15 @@
+label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #8692A6;
+}
+input {
+    padding-left: 30px;
+    padding-top: 22px;
+    padding-bottom: 23px;
+}
+
+input:hover {
+    border: 1px solid #efc81a;
+    box-shadow: none;
+}

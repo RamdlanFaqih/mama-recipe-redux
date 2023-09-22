@@ -1,0 +1,15 @@
+button {
+    color: white;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    margin-bottom: 16px;
+}
+button a{
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+button a:hover {
+    color: white;
+}

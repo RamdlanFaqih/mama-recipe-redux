@@ -1,0 +1,42 @@
+#all-content {
+    margin-top: 50px;
+}
+
+#insert {
+   width: 70%;
+   margin-bottom: 50px;
+}
+
+
+#insert-data label{
+    background-color: #F6F5F4;
+    padding-top: 100px;
+    padding-bottom: 178px;
+}
+
+#insert-data label:hover{
+    background-color: #F6F5F4;
+    padding-top: 100px;
+    padding-bottom: 178px;
+    cursor: pointer;
+}
+#video-button button{
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#video-button button a{
+    text-decoration: none;
+    color: #707070;
+}
+
+#post {
+    width: 50%;
+    margin-bottom: 100px;
+}
+
+#post button{
+    padding-top: 23px;
+    padding-bottom: 23px;
+    color: white;
+}

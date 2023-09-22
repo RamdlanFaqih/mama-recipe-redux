@@ -1,0 +1,101 @@
+#left-section {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #register {
+    width: 426px;
+  }
+  
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .welcome h2 {
+    font-weight: 700;
+    font-size: 30px;
+    color: #efc81a;
+ 
+  }
+  
+  .welcome p {
+    font-size: 18px;
+    color: #8692a6;
+  }
+  
+  .wrapper-form {
+    /* width: 426px; */
+    
+  }
+  
+  .check .checkInput {
+      border: 1px solid #efc81a;
+      width: 17px;
+      height: 17px;
+      box-shadow: none;
+      margin-right: 14px;
+  }
+  
+  .check .checkInput:hover{
+      border: 1px solid #efc81a;
+      box-shadow: none;
+  }
+  
+  .check .checkInput:checked {
+      background-color: #efc81a;
+      border: none;
+      box-shadow: none;
+  }
+  
+  .check .checkLabel {
+      font-size: 16px;
+      color: #8692A6;
+      font-weight: 500;
+  }
+  
+  .button .forgot {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #999;
+  }
+  
+  .sign-up {
+      color: #999;
+      display: flex;
+      justify-content: center;
+  }
+  
+  .sign-up a {
+      color: #efc81a;
+      text-decoration: none;
+  }
+  
+  @media screen and (max-width: 767px) {
+      #left-section {
+          display: none;
+      }
+      }
+      
+      
+      @media screen and (max-width: 576px) {
+          #register {
+              width: 300px;
+         }
+      }

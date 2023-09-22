@@ -1,0 +1,66 @@
+.content {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroTitle {
+  color: #2e266f;
+  font-size: 72px;
+  font-weight: 500;
+}
+
+.search-bar input {
+  padding: 20px;
+}
+
+.bg {
+  position: absolute;
+  background-color: #efc81a;
+  width: 35%;
+  height: 125vh;
+  z-index: -1;
+  top: 0;
+  right: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#landing {
+  margin-bottom: 200px;
+}
+
+#popular {
+    margin-bottom: 200px;
+}
+#subTitle {
+  border-left: 25px solid #efc81a;
+  height: 100px;
+  padding-left: 5px;
+  margin-bottom: 50px;
+}
+
+#fluid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#rightPopular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleContent {
+  font-size: 56px;
+}
+
+#newRecipe {
+    margin-bottom: 200px;
+}
