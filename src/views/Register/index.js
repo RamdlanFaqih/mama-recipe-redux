@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+
 import { registerAction } from "../../redux/reducer/registerSlice"
 import { useDispatch, useSelector } from "react-redux";
 import BgLeft from "../../Component/BgLeft/BgLeft";
@@ -82,7 +82,7 @@ const Register = () => {
                 <Form label="Verify Password" name="verify_password" type="text" placeholder="verify password" value={data.verify_password} onChange={handleChange} />
               </div>
               <div className="button d-grid">
-              <Button buttonName="Register Account" type="submit" text="Register Account" />
+              <Button buttonName="Register Account" type="submit" text="Register Account" path="/login" />
               </div>
               <div className="sign-up">
                 <p>
