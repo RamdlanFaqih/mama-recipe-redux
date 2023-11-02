@@ -16,15 +16,16 @@ function ModalUpdate() {
   const [isError, setIsError] = useState(false);
   const [saveImage, setSaveImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const userId = localStorage.getItem("userId");
-  console.log(userId);
+  const userID = localStorage.getItem("userID");
+  console.log(userID);
 
   useEffect(() => {
     if (show) {
       axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`)
+        .get(`${process.env.REACT_APP_BACKEND_URL}/users/${userID}`)
         .then((response) => {
           setUser(response.data);
+          console.log(response.data)
         })
         .catch((err) => {
           console.log(err.message);
@@ -56,13 +57,13 @@ function ModalUpdate() {
     userUpdate.append("image", saveImage);
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/updateProfile/${userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/updateProfile/${userID}`,
         userUpdate
       );
       console.log(response);
       handleClose();
     } catch (err) {
-      console.log(err.message); // Changed from err.errorMessage
+      console.log(err.message);
       setIsError(true);
       setErrorMessage("Data Error");
     }

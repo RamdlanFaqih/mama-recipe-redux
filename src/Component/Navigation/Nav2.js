@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const Navigation = (props) => {
+const NavigationLogin = (props) => {
     const navigate = useNavigate()
     function logOut() {
         localStorage.clear();
@@ -51,4 +51,4 @@ const Navigation = (props) => {
   );
 };
 
-export default Navigation;
+export default NavigationLogin;

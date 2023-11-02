@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import Navigation from "../../Component/Navigation/Nav2";
+import Navigation from "../../Component/Navigation/Nav1";
+import NavigationLogin from "../../Component/Navigation/Nav2";
 import Footer from "../../Component/Footer/Footer";
 import Button from "../../Component/Button/Button";
 import style from "./style.module.css";
@@ -15,14 +16,25 @@ import ImgGrid6 from "../../assets/img/grid2-3.svg"
 
 
 const Home = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (typeof window !== "undefined"){
+      setIsLoggedIn(!!localStorage.getItem("token"));
+    }
+  }, [])
   function logOut() {
     localStorage.clear();
     return navigate("/login");
   }
   return (
     <React.Fragment>
-      <Navigation />
+      {isLoggedIn ? (
+        <NavigationLogin />
+      ) : (
+        <Navigation />
+      )}
       <main className={style.content} id="main">
         <div className="container">
           <section id={style.landing}>

@@ -92,7 +92,7 @@ const Login = () => {
                 />
               </div>
               <div className="wrapper-form">
-                <Form label="Password" name="password" type="text" placeholder="password" value={data.password} onChange={handleChange} />
+                <Form label="Password" name="password" type="password" placeholder="password" value={data.password} onChange={handleChange} />
               </div>
               <div className="check">
                 <input

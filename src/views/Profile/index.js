@@ -5,7 +5,6 @@ import Footer from "../../Component/Footer/Footer";
 import Button from "../../Component/Button/Button";
 import style from "./profile.module.css";
 import Image1 from "../../assets/img/img1.svg";
-
 import ModalUpdate from "../../Component/modalUpdate/index";
 
 const Profile = () => {

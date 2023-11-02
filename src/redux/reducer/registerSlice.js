@@ -9,8 +9,7 @@ export const registerAction = createAsyncThunk(
                 data.name === "" ||
                 data.email_address === "" ||
                 data.phone_number === "" ||
-                data.password === "" ||
-                data.verify_password === ""
+                data.password === ""
             ) {
                 return rejectWithValue("Input is empty")
             }
@@ -19,7 +18,6 @@ export const registerAction = createAsyncThunk(
                 email_address: data.email_address,
                 phone_number: data.phone_number,
                 password: data.password,
-                verify_password: data.verify_password
             };
 
             await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, userData)
