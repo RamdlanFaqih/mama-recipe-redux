@@ -3,8 +3,6 @@
 
 This documentation provides a comprehensive guide to the frontend development of the Mama Recipe website. Here, you will find detailed information about the project's structure, components, and usage guidelines. Please read through this document carefully to gain insights into the Mama Recipe frontend.
 ## Table Of Content
-
-- [Description](#description)
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
 - [Built With](#built-with)
@@ -13,9 +11,6 @@ This documentation provides a comprehensive guide to the frontend development of
 - [Contributing](#contributing)
 
 ---
-## Project Description
-
-Welcome to the Mama Recipe Frontend Documentation! In this guide, you will find essential information about the frontend development of the Mama Recipe website. This includes details about the project's structure, the technologies used, and guidelines for usage and contribution.
 
 ## Project Structure
 
