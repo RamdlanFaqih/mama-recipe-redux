@@ -1,3 +1,4 @@
+/* Default styles */
 .content {
   margin-top: 50px;
   display: flex;
@@ -31,13 +32,6 @@
   justify-content: center;
 }
 
-#landing {
-  margin-bottom: 200px;
-}
-
-#popular {
-    margin-bottom: 200px;
-}
 #subTitle {
   border-left: 25px solid #efc81a;
   height: 100px;
@@ -45,22 +39,52 @@
   margin-bottom: 50px;
 }
 
-#fluid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#rightPopular {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .titleContent {
   font-size: 56px;
 }
 
-#newRecipe {
-    margin-bottom: 200px;
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+  .heroTitle {
+    font-size: 60px;
+  }
+
+  .search-bar input {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .bg {
+    display: none;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 48px;
+  }
+
+
+  #subTitle {
+    margin-bottom: 30px;
+  }
+
+  .titleContent {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroTitle {
+    font-size: 36px;
+  }
+
+  .titleContent {
+    font-size: 32px;
+  }
 }

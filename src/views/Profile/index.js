@@ -6,10 +6,14 @@ import Button from "../../Component/Button/Button";
 import style from "./profile.module.css";
 import Image1 from "../../assets/img/img1.svg";
 import ModalUpdate from "../../Component/modalUpdate/index";
+import { FaTrash } from "react-icons/fa";
+import DeleteConfirmationModal from "../../Component/ModalDelete";
 
 const Profile = () => {
   const [user, setUser] = React.useState("");
+  const [recipesId, setRecipesId] = React.useState(null);
   const [recipes, setRecipes] = React.useState([]);
+  const [showModal, setShowModal] = React.useState(false);
   const userID = localStorage.getItem("userID");
   console.log(userID);
 
@@ -37,6 +41,28 @@ const Profile = () => {
   React.useEffect(() => {
     localStorage.setItem("userRecipes", JSON.stringify(recipes));
   }, [recipes]);
+
+  const handleDeleteClick = (recipes_id) => {
+    setRecipesId(recipes_id);
+    setShowModal(true);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/hapusproduct/${recipesId}`
+      );
+
+      const updatedRecipes = recipes.filter(
+        (recipe) => recipe.recipes_id !== recipesId
+      );
+      setRecipes(updatedRecipes);
+
+      setShowModal(false);
+    } catch (error) {
+      console.error("Failed to delete recipe:", error);
+    }
+  };
 
   return (
     <div>
@@ -73,18 +99,36 @@ const Profile = () => {
                   data-bs-parent="#accordionFlushExample"
                 >
                   <div className="accordion-body row">
-                    {recipes.map((recipe) => (
-                      <div className="col col-lg-4" key={recipe.recipes_id}>
-                        <div className={style.recipesContainer}>
-                          <img
-                            src={recipe.image}
-                            alt="myrecipe"
-                            className={style.recipes}
-                          />
-                          <h1 className={style.foodName}>{recipe.food_name}</h1>
+                    <div className="row row-cols-1 row-cols-lg-3 g-4">
+                      {recipes.map((recipe) => (
+                        <div className="col" key={recipe.recipes_id}>
+                          <div className={style.recipesContainer}>
+                            <span
+                              className={style.deleteIcon}
+                              onClick={() =>
+                                handleDeleteClick(recipe.recipes_id)
+                              }
+                            >
+                              <FaTrash />
+                            </span>
+                            <img
+                              src={recipe.image}
+                              alt="myrecipe"
+                              className={style.recipes}
+                            />
+                            <h1 className={style.foodName}>
+                              {recipe.food_name}
+                            </h1>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+
+                    <DeleteConfirmationModal
+                      show={showModal}
+                      onHide={() => setShowModal(false)}
+                      onConfirm={handleDelete}
+                    />
                   </div>
                 </div>
               </div>

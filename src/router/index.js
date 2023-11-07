@@ -13,6 +13,7 @@ import Register from "../views/Register";
 import DetailRecipe from "../views/DetailRecipe";
 import Profile from "../views/Profile";
 import DetailVideo from "../views/DetailVideo";
+import SearchPage from "../views/Search";
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -27,8 +28,11 @@ const Router = () => {
         <Route path="register" element={<Register />} />
         <Route path="addRecipe" element={<PrivateRoute><AddRecipe /></PrivateRoute>} />
         <Route path="detailRecipe" element={<PrivateRoute><DetailRecipe /></PrivateRoute>} />
+        <Route path="detailRecipe/:recipes_id" element={<PrivateRoute><DetailRecipe /></PrivateRoute>} />
         <Route path="Profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="DetailVideo" element={<PrivateRoute><DetailVideo /></PrivateRoute>} />
+        <Route path="DetailVideo/:recipes_id" element={<PrivateRoute><DetailVideo /></PrivateRoute>} />
+        <Route path="search" element={<SearchPage />}/>
       </Routes>
     </BrowserRouter>
   );
