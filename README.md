@@ -52,7 +52,7 @@ mama-recipe-frontend/
 
 # Description
 
-Mama Recipe is a website that allows users to share recipes and watch cooking tutorials through videos. Features of the Mama Recipe website and mobile apps include allowing users to create and share their own recipes. Users can also browse and view recipes shared by other users. The website displays cooking tutorials in the form of videos, providing easy-to-follow step-by-step guidance.
+Mama Recipe is a website that allows users to share recipes and watch cooking tutorials through videos. Features of the Mama Recipe website include allowing users to create and share their own recipes. Users can also browse and view recipes shared by other users. The website displays cooking tutorials in the form of videos, providing easy-to-follow step-by-step guidance.
 
 ## Screenshots
 
