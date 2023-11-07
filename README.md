@@ -3,8 +3,6 @@
 
 This documentation provides a comprehensive guide to the frontend development of the Mama Recipe website. Here, you will find detailed information about the project's structure, components, and usage guidelines. Please read through this document carefully to gain insights into the Mama Recipe frontend.
 ## Table Of Content
-
-- [Description](#description)
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
 - [Built With](#built-with)
@@ -13,9 +11,6 @@ This documentation provides a comprehensive guide to the frontend development of
 - [Contributing](#contributing)
 
 ---
-## Description
-
-Welcome to the Mama Recipe Frontend Documentation! In this guide, you will find essential information about the frontend development of the Mama Recipe website. This includes details about the project's structure, the technologies used, and guidelines for usage and contribution.
 
 ## Project Structure
 
@@ -55,9 +50,9 @@ mama-recipe-frontend/
 ## Screenshots
 ## Built With
 - **React JS**: Primary library for building dynamic and responsive user interface components.
-- **React/Bootstrap**: Styling and UI components designed using React/Bootstrap for an aesthetically pleasing look and user-friendly experience.
+- **React/Bootstrap**:  UI framework for designing sleek and responsive user interfaces.
 - **Axios**: Library used for making HTTP requests to the Mama Recipe backend server.
-- **State Management**: Redux or Context API utilized for managing global application state if necessary.
+- **Redux**: State management library for managing the global state of the application.
 
 ## Usage
 
