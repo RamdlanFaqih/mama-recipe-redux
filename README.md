@@ -1,9 +1,11 @@
-
 # Mama Recipe Frontend Documentation
 
 This documentation provides a comprehensive guide to the frontend development of the Mama Recipe website. Here, you will find detailed information about the project's structure, components, and usage guidelines. Please read through this document carefully to gain insights into the Mama Recipe frontend.
+
 ## Table Of Content
+
 - [Project Structure](#project-structure)
+- [Description](#description)
 - [Screenshots](#screenshots)
 - [Built With](#built-with)
 - [Usage](#usage)
@@ -47,6 +49,11 @@ mama-recipe-frontend/
 |-- README.md
 
 ```
+
+# Description
+
+Mama Recipe is a website that allows users to share recipes and watch cooking tutorials through videos. Features of the Mama Recipe website and mobile apps include allowing users to create and share their own recipes. Users can also browse and view recipes shared by other users. The website displays cooking tutorials in the form of videos, providing easy-to-follow step-by-step guidance.
+
 ## Screenshots
 
 <details>
@@ -126,10 +133,10 @@ mama-recipe-frontend/
 <img src="screenshots/MyRecipe.png" alt="Landing Page" />
 </details>
 
-
 ## Built With
+
 - **React JS**: Primary library for building dynamic and responsive user interface components.
-- **React/Bootstrap**:  UI framework for designing sleek and responsive user interfaces.
+- **React/Bootstrap**: UI framework for designing sleek and responsive user interfaces.
 - **Axios**: Library used for making HTTP requests to the Mama Recipe backend server.
 - **Redux**: State management library for managing the global state of the application.
 
@@ -141,6 +148,7 @@ mama-recipe-frontend/
 4. Install project dependencies: `npm install`
 5. Run the project locally: `npm start`
 6. Access `http://localhost:3000` in your browser to view the Mama Recipe website.
+
 ## Related Project
 
 - [Mama Recipe Backend](https://github.com/RamdlanFaqih/BE-Mama-Recipe) - Backend for Mama Recipe
