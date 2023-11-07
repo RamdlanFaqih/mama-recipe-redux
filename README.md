@@ -48,6 +48,13 @@ mama-recipe-frontend/
 
 ```
 ## Screenshots
+
+<details>
+  <summary>
+    Landing Page
+  </summary>
+<img src="screenshots/Home.png" alt="Landing Page" />
+</details>
 ## Built With
 - **React JS**: Primary library for building dynamic and responsive user interface components.
 - **React/Bootstrap**:  UI framework for designing sleek and responsive user interfaces.
