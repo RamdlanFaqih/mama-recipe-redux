@@ -44,7 +44,7 @@ const DetailRecipe = () => {
           <div className="row align-items-center">
             <div className="col-12 text-center" id={style.titleContent}>
               <h1>{recipes.food_name}</h1>
-              <img src={recipes.image} className="img-fluid" alt="" />
+              <img src={recipes.image} className={`${style.imageRecipes} img-fluid`} alt="" />
             </div>
             <div className="col-12" id={style.sectionIngredients}>
               <div className="container title-ingredients">

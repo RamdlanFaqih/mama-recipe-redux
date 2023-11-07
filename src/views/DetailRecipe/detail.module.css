@@ -44,3 +44,10 @@
     margin-top: 40px;
     width: 30%;
 }
+
+.imageRecipes {
+    width: 1002px;
+    height: 700px;
+    border-radius: 10px;
+    object-fit: cover;
+}

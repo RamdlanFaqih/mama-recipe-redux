@@ -51,10 +51,81 @@ mama-recipe-frontend/
 
 <details>
   <summary>
+    Login
+  </summary>
+<img src="screenshots/Login.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Register
+  </summary>
+<img src="screenshots/Register.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
     Landing Page
   </summary>
 <img src="screenshots/Home.png" alt="Landing Page" />
 </details>
+
+<details>
+  <summary>
+    Search Page
+  </summary>
+<img src="screenshots/SearchPage.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Search Page Function
+  </summary>
+<img src="screenshots/SearchRecipe.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Search Page Sorting
+  </summary>
+<img src="screenshots/Sort.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Add Recipe
+  </summary>
+<img src="screenshots/AddRecipe.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Detail Recipe
+  </summary>
+<img src="screenshots/DetailRecipe.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Detail Video
+  </summary>
+<img src="screenshots/DetailVideo.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Profile
+  </summary>
+<img src="screenshots/Profile.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Profile My Recipe Section
+  </summary>
+<img src="screenshots/MyRecipe.png" alt="Landing Page" />
+</details>
+
 
 ## Built With
 - **React JS**: Primary library for building dynamic and responsive user interface components.

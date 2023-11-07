@@ -76,7 +76,6 @@ const DetailVideo = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
