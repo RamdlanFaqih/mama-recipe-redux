@@ -2,9 +2,7 @@ import React from "react";
 import axios from "axios";
 import Navigation from "../../Component/Navigation/Nav1";
 import Footer from "../../Component/Footer/Footer";
-import Button from "../../Component/Button/Button";
 import style from "./profile.module.css";
-import Image1 from "../../assets/img/img1.svg";
 import ModalUpdate from "../../Component/modalUpdate/index";
 import { FaTrash } from "react-icons/fa";
 import DeleteConfirmationModal from "../../Component/ModalDelete";
@@ -37,7 +35,7 @@ const Profile = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [userID]);
   React.useEffect(() => {
     localStorage.setItem("userRecipes", JSON.stringify(recipes));
   }, [recipes]);

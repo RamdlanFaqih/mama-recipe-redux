@@ -46,8 +46,8 @@
 }
 
 .imageRecipes {
-    width: 1002px;
-    height: 700px;
+    width: 200px;
+    height: 500px;
     border-radius: 10px;
     object-fit: cover;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { registerAction } from "../../redux/reducer/registerSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import BgLeft from "../../Component/BgLeft/BgLeft";
 import Form from "../../Component/Form/Form";
 import Button from "../../Component/Button/Button";

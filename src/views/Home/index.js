@@ -15,10 +15,13 @@ import ImgGrid3 from "../../assets/img/grid1-3.svg";
 import ImgGrid4 from "../../assets/img/grid2-1.svg";
 import ImgGrid5 from "../../assets/img/grid2-2.svg";
 import ImgGrid6 from "../../assets/img/grid2-3.svg";
+import { setInitialSearchQuery } from "../../redux/reducer/searchSlice"
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
   const [recipes, setRecipes] = useState(true);
   const navigate = useNavigate();
 
@@ -44,14 +47,12 @@ const Home = () => {
     fetchRecipes()
   }, []);
 
-  const handleSearch = (searchQuery) => {
-    navigate(`/search?query=${searchQuery}`);
+  const handleSearch = () => {
+    dispatch(setInitialSearchQuery(searchQuery)); 
+    const encodedSearchQuery = encodeURIComponent(searchQuery);
+    navigate(`/search?query=${encodedSearchQuery}`);
   };
 
-  function logOut() {
-    localStorage.clear();
-    return navigate("/login");
-  }
   return (
     <React.Fragment>
       {isLoggedIn ? <NavigationLogin /> : <Navigation />}

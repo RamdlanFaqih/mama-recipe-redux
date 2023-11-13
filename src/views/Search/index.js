@@ -1,40 +1,30 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchQuery, setSortOption, fetchRecipes } from '../../redux/reducer/searchSlice';
 import style from "./style.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineFilter, AiOutlineSearch } from "react-icons/ai";
-import { Button } from "bootstrap";
+import { AiOutlineSearch } from "react-icons/ai";
+import { useLocation, useNavigate  } from 'react-router-dom';
 
 const SearchPage = () => {
-  const [recipe, setRecipe] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sort, setSort] = useState(""); // State untuk menyimpan nilai sort
-  const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const initialSearchQuery = new URLSearchParams(location.search).get("query");
+  const location = useLocation();
+  const { searchQuery, sortOption, recipes, status, error } = useSelector((state) => state.search);
+  
 
   useEffect(() => {
-    setSearchQuery(initialSearchQuery || "");
-    fetchData(initialSearchQuery, sort);
-  }, [initialSearchQuery, sort]);
-
+    dispatch(setSearchQuery(searchQuery));
+    dispatch(fetchRecipes({ query: searchQuery, sortOption }));
+  }, [searchQuery, sortOption, dispatch]);
   
-  const fetchData = async (query, sortOption) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes?search=${query}&sort=${sortOption}`
-      );
-      setRecipe(response.data.message.rows);
-      console.log(response.data.message.rows);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleSearch = () => {
-    fetchData(searchQuery, sort);
-    navigate(`/search?query=${searchQuery}&sort=${sort}`);
+    const updatedSearchQuery = encodeURIComponent(searchQuery);
+    const updatedSortOption = encodeURIComponent(sortOption);
+    navigate(`/search?query=${updatedSearchQuery}&sort=${updatedSortOption}`);
+    dispatch(fetchRecipes({ query: searchQuery, sortOption }));
   };
+
 
   const handleClick = (recipes_id) => {
     navigate(`/DetailRecipe/${recipes_id}`);
@@ -51,7 +41,7 @@ const SearchPage = () => {
             aria-label=".form-control-lg example"
             name="searchQuery"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
           />
           <span className="input-group-text px-3" onClick={handleSearch}>
             <AiOutlineSearch />
@@ -61,8 +51,8 @@ const SearchPage = () => {
           <select
             className="form-select form-select-md"
             aria-label="Default select example"
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
+            value={sortOption}
+            onChange={(e) => dispatch(setSortOption(e.target.value))}
           >
             <option value="">Sort By</option>
             <option value="ASC">A-Z</option>
@@ -73,7 +63,9 @@ const SearchPage = () => {
 
       <div className="container mt-3">
         <div className="row">
-          {recipe.map((recipeItem) => (
+          {status === 'loading' && <p>Loading...</p>}
+          {status === 'failed' && <p>Error: {error}</p>}
+          {status === 'succeeded' && recipes.map((recipeItem) => (
             <div className="col-lg-4 mb-3" key={recipeItem.recipes_id}>
               <div
                 className={`bg-primary ${style.recipesContainer}`}

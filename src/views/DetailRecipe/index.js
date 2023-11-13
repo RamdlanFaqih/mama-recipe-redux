@@ -34,7 +34,6 @@ const DetailRecipe = () => {
     console.log("handleVideo is called");
     navigate(`/DetailVideo/${recipes_id}`);
   };
-  
 
   return (
     <div>
@@ -44,7 +43,13 @@ const DetailRecipe = () => {
           <div className="row align-items-center">
             <div className="col-12 text-center" id={style.titleContent}>
               <h1>{recipes.food_name}</h1>
-              <img src={recipes.image} className={`${style.imageRecipes} img-fluid`} alt="" />
+              <div>
+                <img
+                  src={recipes.image}
+                  className={`${style.imageRecipes} `}
+                  alt=""
+                />
+              </div>
             </div>
             <div className="col-12" id={style.sectionIngredients}>
               <div className="container title-ingredients">
@@ -60,7 +65,11 @@ const DetailRecipe = () => {
               </div>
               <div className="container video-button">
                 <div className="mt-3 d-grid">
-                  <button type="button" className="btn btn-warning btn-lg" onClick={() => handleVideo()}>
+                  <button
+                    type="button"
+                    className="btn btn-warning btn-lg"
+                    onClick={() => handleVideo()}
+                  >
                     <FaPlay color="#fff" size={30} />
                   </button>
                 </div>
@@ -84,10 +93,7 @@ const DetailRecipe = () => {
                   className="d-grid mx-auto text-center"
                   id={style.buttonSend}
                 >
-                  <button
-                    type="submit"
-                    className="btn btn-warning text-light"
-                  >
+                  <button type="submit" className="btn btn-warning text-light">
                     Send
                   </button>
                 </div>
