@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../../Component/Navigation/Nav1";
 import Footer from "../../Component/Footer/Footer";
-import Button from "../../Component/Button/Button";
 import style from "./detail.module.css";
-import imgDetail from "../../assets/img/imgDetail.svg";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaPlay } from "react-icons/fa6";

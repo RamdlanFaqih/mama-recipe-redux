@@ -1,15 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchRecipes = createAsyncThunk('search/fetchRecipes', async ({ query, sortOption }) => {
+const ITEMS_PER_PAGE = 6; // Uncomment this line
+export const fetchRecipes = createAsyncThunk(
+  'search/fetchRecipes',
+  async ({ query, sortOption, page, limit }) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/recipes?search=${query}&sort=${sortOption}`);
-      return response.data.message.rows;
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/recipes?search=${query}&sort=${sortOption}&page=${page}&limit=${limit}`
+      );
+      return response.data;    
     } catch (error) {
       throw error;
     }
-  });
-  
+  }
+);
 
 const searchSlice = createSlice({
   name: 'search',
@@ -19,6 +24,8 @@ const searchSlice = createSlice({
     recipes: [],
     status: 'idle',
     error: null,
+    currentPage: 1,
+    totalPages: null
   },
   reducers: {
     setInitialSearchQuery: (state, action) => {
@@ -30,6 +37,9 @@ const searchSlice = createSlice({
     setSortOption: (state, action) => {
       state.sortOption = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -37,9 +47,15 @@ const searchSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchRecipes.fulfilled, (state, action) => {
+        console.log('Action Payload:', action.payload.data.rows); // Tambahkan log ini
         state.status = 'succeeded';
-        state.recipes = action.payload;
+        state.recipes = action.payload.data.rows;
+        state.currentPage = action.meta.arg.page;
+        state.totalPages = Math.ceil((action.payload.total || 0) / ITEMS_PER_PAGE);
       })
+      
+      
+      
       .addCase(fetchRecipes.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
@@ -47,5 +63,5 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setSearchQuery, setSortOption, setInitialSearchQuery } = searchSlice.actions;
+export const { setSearchQuery, setSortOption, setInitialSearchQuery, setCurrentPage } = searchSlice.actions;
 export default searchSlice.reducer;

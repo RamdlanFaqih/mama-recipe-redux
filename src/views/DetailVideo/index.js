@@ -1,6 +1,5 @@
 import React from "react";
 import Navigation from "../../Component/Navigation/Nav1";
-import Footer from "../../Component/Footer/Footer";
 import axios from "axios";
 import style from "./video.module.css";
 import ThumbVid1 from "../../assets/img/thumbnail-vid1.svg"
@@ -41,7 +40,6 @@ const DetailVideo = () => {
                   height="540"
                   src={recipes.video}
                   title="YouTube video player"
-                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>

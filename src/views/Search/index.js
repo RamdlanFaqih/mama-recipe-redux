@@ -1,22 +1,38 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setSortOption, fetchRecipes } from '../../redux/reducer/searchSlice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSearchQuery,
+  setSortOption,
+  fetchRecipes,
+} from "../../redux/reducer/searchSlice";
 import style from "./style.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useLocation, useNavigate  } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { searchQuery, sortOption, recipes, status, error } = useSelector((state) => state.search);
-  
+  const {
+    searchQuery,
+    sortOption,
+    recipes,
+    status,
+    currentPage,
+    totalPages,
+    error,
+  } = useSelector((state) => state.search);
 
   useEffect(() => {
+    const page = new URLSearchParams(location.search).get("page") || 1;
+
     dispatch(setSearchQuery(searchQuery));
-    dispatch(fetchRecipes({ query: searchQuery, sortOption }));
-  }, [searchQuery, sortOption, dispatch]);
-  
+    dispatch(
+      fetchRecipes({ query: searchQuery, sortOption, page: parseInt(page) })
+    );
+  }, [searchQuery, sortOption, location.search, dispatch]);
+  // console.log("Total Pages:", totalPages);
+  // console.log("Current Page:", currentPage);
 
   const handleSearch = () => {
     const updatedSearchQuery = encodeURIComponent(searchQuery);
@@ -25,6 +41,22 @@ const SearchPage = () => {
     dispatch(fetchRecipes({ query: searchQuery, sortOption }));
   };
 
+  const handlePagination = (newPage) => {
+    const updatedSearchQuery = encodeURIComponent(searchQuery);
+    const updatedSortOption = encodeURIComponent(sortOption);
+    const parsedPage = parseInt(newPage, 10); // Parse newPage to an integer
+    dispatch(
+      fetchRecipes({
+        query: searchQuery,
+        sortOption,
+        page: parsedPage,
+        limit: 6,
+      })
+    );
+    navigate(
+      `/search?query=${updatedSearchQuery}&sort=${updatedSortOption}&page=${parsedPage}`
+    );
+  };
 
   const handleClick = (recipes_id) => {
     navigate(`/DetailRecipe/${recipes_id}`);
@@ -63,24 +95,67 @@ const SearchPage = () => {
 
       <div className="container mt-3">
         <div className="row">
-          {status === 'loading' && <p>Loading...</p>}
-          {status === 'failed' && <p>Error: {error}</p>}
-          {status === 'succeeded' && recipes.map((recipeItem) => (
-            <div className="col-lg-4 mb-3" key={recipeItem.recipes_id}>
-              <div
-                className={`bg-primary ${style.recipesContainer}`}
-                onClick={() => handleClick(recipeItem.recipes_id)}
-              >
-                <img
-                  src={recipeItem.image}
-                  alt="myrecipe"
-                  className={style.recipes}
-                />
-                <h1 className={style.foodName}>{recipeItem.food_name}</h1>
+          {status === "loading" && <p>Loading...</p>}
+          {status === "failed" && <p>Error: {error}</p>}
+          {status === "succeeded" &&
+            recipes.map((recipeItem) => (
+              <div className="col-lg-4 mb-3" key={recipeItem.recipes_id}>
+                <div
+                  className={`bg-primary ${style.recipesContainer}`}
+                  onClick={() => handleClick(recipeItem.recipes_id)}
+                >
+                  <img
+                    src={recipeItem.image}
+                    alt="myrecipe"
+                    className={style.recipes}
+                  />
+                  <h1 className={style.foodName}>{recipeItem.food_name}</h1>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
+        {status === "succeeded" && recipes.length > 0 && (
+          <div className="d-flex justify-content-center mt-3">
+            {/* Left arrow */}
+            <button
+              className="btn btn-sm btn-outline-primary mx-1"
+              onClick={() => handlePagination(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              {"<"}
+            </button>
+
+            {/* Page numbers */}
+            {console.log(
+              "Total Pages:",
+              totalPages,
+              "Current Page:",
+              currentPage
+            )}
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                className={`btn btn-sm ${
+                  currentPage === index + 1
+                    ? "btn-primary"
+                    : "btn-outline-primary"
+                } mx-1`}
+                onClick={() => handlePagination(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            {/* Right arrow */}
+            <button
+              className="btn btn-sm btn-outline-primary mx-1"
+              onClick={() => handlePagination(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              {">"}
+            </button>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );
