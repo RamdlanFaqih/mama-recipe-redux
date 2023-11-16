@@ -4,16 +4,20 @@ import { useDispatch } from "react-redux";
 import BgLeft from "../../Component/BgLeft/BgLeft";
 import Form from "../../Component/Form/Form";
 import Button from "../../Component/Button/Button";
+import { useNavigate } from 'react-router-dom'
 import "./register.css";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [data, setData] = React.useState({
     name: "",
-    email: "",
+    email_address: "",
     phone_number: "",
     password: "",
   });
+  const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
+  const [showErrorAlert, setShowErrorAlert] = React.useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -25,9 +29,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    dispatch(registerAction({ data }));
-  };
+  
+    dispatch(registerAction({ data, navigate }));
+  };  
   return (
     <React.Fragment>
       <div className="container-fluid">
@@ -55,10 +59,10 @@ const Register = () => {
                 <div className="wrapper-form">
                   <Form
                     label="Email Address"
-                    name="email"
+                    name="email_address"
                     type="text"
                     placeholder="Email Address"
-                    value={data.email}
+                    value={data.email_address}
                     onChange={handleChange}
                   />
                 </div>
@@ -87,7 +91,7 @@ const Register = () => {
                     buttonName="Register Account"
                     type="submit"
                     text="Register Account"
-                    path="/login"
+                    path="#"
                   />
                 </div>
                 <div className="sign-up">

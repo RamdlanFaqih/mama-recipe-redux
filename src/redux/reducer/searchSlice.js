@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const ITEMS_PER_PAGE = 6; // Uncomment this line
 export const fetchRecipes = createAsyncThunk(
   'search/fetchRecipes',
-  async ({ query, sortOption, page, limit }) => {
+  async ({ query, sortOption, page }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes?search=${query}&sort=${sortOption}&page=${page}&limit=${limit}`
+        `${process.env.REACT_APP_BACKEND_URL}/recipes?search=${query}&sort=${sortOption}&page=${page}`
       );
-      return response.data;    
+      console.log(response.data.result);
+      return response.data.result;    
     } catch (error) {
       throw error;
     }
@@ -25,7 +25,7 @@ const searchSlice = createSlice({
     status: 'idle',
     error: null,
     currentPage: 1,
-    totalPages: null
+    totalPages: 1,
   },
   reducers: {
     setInitialSearchQuery: (state, action) => {
@@ -47,15 +47,15 @@ const searchSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchRecipes.fulfilled, (state, action) => {
-        console.log('Action Payload:', action.payload.data.rows); // Tambahkan log ini
+        console.log(action.payload); // Tambahkan log ini
+        const { currentPage, totalPage, result } = action.payload; // Ubah ini
         state.status = 'succeeded';
-        state.recipes = action.payload.data.rows;
-        state.currentPage = action.meta.arg.page;
-        state.totalPages = Math.ceil((action.payload.total || 0) / ITEMS_PER_PAGE);
+        state.recipes = result.rows; // Sesuaikan ini
+        state.currentPage = currentPage;
+        state.totalPages = totalPage;
       })
       
-      
-      
+        
       .addCase(fetchRecipes.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;

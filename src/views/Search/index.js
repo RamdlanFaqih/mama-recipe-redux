@@ -22,7 +22,8 @@ const SearchPage = () => {
     totalPages,
     error,
   } = useSelector((state) => state.search);
-
+  console.log(totalPages);
+  console.log(currentPage)
   useEffect(() => {
     const page = new URLSearchParams(location.search).get("page") || 1;
 
@@ -31,26 +32,28 @@ const SearchPage = () => {
       fetchRecipes({ query: searchQuery, sortOption, page: parseInt(page) })
     );
   }, [searchQuery, sortOption, location.search, dispatch]);
-  // console.log("Total Pages:", totalPages);
-  // console.log("Current Page:", currentPage);
+ 
 
   const handleSearch = () => {
-    const updatedSearchQuery = encodeURIComponent(searchQuery);
-    const updatedSortOption = encodeURIComponent(sortOption);
-    navigate(`/search?query=${updatedSearchQuery}&sort=${updatedSortOption}`);
-    dispatch(fetchRecipes({ query: searchQuery, sortOption }));
+    const encodedQuery = encodeURIComponent(searchQuery);
+    const encodedSort = encodeURIComponent(sortOption);
+    dispatch(fetchRecipes({ query: encodedQuery, sortOption: encodedSort, page: 1 }));
+
+    navigate (
+      `/search?query=${encodedQuery}&sort=${encodedSort}&page=1`
+    )
   };
 
   const handlePagination = (newPage) => {
     const updatedSearchQuery = encodeURIComponent(searchQuery);
     const updatedSortOption = encodeURIComponent(sortOption);
-    const parsedPage = parseInt(newPage, 10); // Parse newPage to an integer
+    const parsedPage = parseInt(newPage, 10) || 1;
+
     dispatch(
       fetchRecipes({
-        query: searchQuery,
-        sortOption,
+        query: updatedSearchQuery,
+        sortOption: updatedSortOption,
         page: parsedPage,
-        limit: 6,
       })
     );
     navigate(
@@ -118,28 +121,23 @@ const SearchPage = () => {
           <div className="d-flex justify-content-center mt-3">
             {/* Left arrow */}
             <button
-              className="btn btn-sm btn-outline-primary mx-1"
+              className="btn btn-sm btn-outline-warning mx-1"
               onClick={() => handlePagination(currentPage - 1)}
               disabled={currentPage === 1}
             >
               {"<"}
             </button>
+            
 
             {/* Page numbers */}
-            {console.log(
-              "Total Pages:",
-              totalPages,
-              "Current Page:",
-              currentPage
-            )}
             {Array.from({ length: totalPages }, (_, index) => (
               <button
                 key={index + 1}
                 className={`btn btn-sm ${
                   currentPage === index + 1
-                    ? "btn-primary"
-                    : "btn-outline-primary"
-                } mx-1`}
+                    ? "btn-warning color"
+                    : "btn-outline-warning"
+                } mx-1 px-3`}
                 onClick={() => handlePagination(index + 1)}
               >
                 {index + 1}
@@ -148,7 +146,7 @@ const SearchPage = () => {
 
             {/* Right arrow */}
             <button
-              className="btn btn-sm btn-outline-primary mx-1"
+              className="btn btn-sm btn-outline-warning mx-1"
               onClick={() => handlePagination(currentPage + 1)}
               disabled={currentPage === totalPages}
             >

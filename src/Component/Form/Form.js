@@ -11,7 +11,6 @@ const Form = (props) => {
           name={props.name}
           type={props.type}
           className="form-control"
-          id="exampleFormControlInput1"
           placeholder={props.placeholder}
           value={props.value}
           onChange={props.onChange}

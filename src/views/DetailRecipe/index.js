@@ -5,10 +5,16 @@ import style from "./detail.module.css";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaPlay } from "react-icons/fa6";
+import { AiOutlineLike, AiFillLike } from "react-icons/ai";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { data } from "jquery";
 
 const DetailRecipe = () => {
   const { recipes_id } = useParams();
+  const users_id = localStorage.getItem("userID");
   const [recipes, setRecipes] = useState("");
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +39,39 @@ const DetailRecipe = () => {
     navigate(`/DetailVideo/${recipes_id}`);
   };
 
+  const handleLike = async () => {
+    console.log(users_id);
+    try {
+      if (isLiked) {
+        const response = await axios.delete(
+          `${process.env.REACT_APP_BACKEND_URL}/liked/${users_id}`,
+          {
+            data: {
+              recipes_id: recipes_id,
+              users_id: users_id,
+            },
+          }
+        );
+        console.log("Unliked Recipe", response.data);
+      } else {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/liked/${users_id}`,
+          {
+            recipes_id: recipes_id,
+            users_id: users_id,
+          }
+        );
+        console.log("Liked Recipe", response.data);
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.log("Error Like/Unlike");
+    }
+  };
+  const handleSave = () => {
+    setIsSaved(!isSaved);
+  };
+
   return (
     <div>
       <Navigation />
@@ -41,14 +80,57 @@ const DetailRecipe = () => {
           <div className="row align-items-center">
             <div className="col-12 text-center" id={style.titleContent}>
               <h1>{recipes.food_name}</h1>
-              <div>
+              <div
+                className=""
+                style={{ position: "relative", width: "100%", height: "auto" }}
+              >
                 <img
                   src={recipes.image}
                   className={`${style.imageRecipes} `}
-                  alt=""
+                  alt="resep"
+                  style={{ width: "100%", height: "600px" }}
                 />
+                <div className="">
+                  <div
+                    className={style.likeIcon}
+                    style={{
+                      position: "absolute",
+                      bottom: "40px",
+                      right: "40px",
+                      backgroundColor: isLiked ? "#EFC81A" : "transparent",
+                      padding: "5px",
+                      cursor: "pointer",
+                    }}
+                    onClick={handleLike}
+                  >
+                    {isLiked ? (
+                      <AiFillLike color="#FFF" size={52} />
+                    ) : (
+                      <AiOutlineLike color="#FFF" size={52} />
+                    )}
+                  </div>
+                  <div
+                    className={style.saveIcon}
+                    style={{
+                      position: "absolute",
+                      bottom: "40px",
+                      right: "120px",
+                      backgroundColor: isSaved ? "#3498db" : "transparent",
+                      padding: "5px",
+                      cursor: "pointer",
+                    }}
+                    onClick={handleSave}
+                  >
+                    {isSaved ? (
+                      <FaBookmark color="#FFF" size={52} />
+                    ) : (
+                      <FaRegBookmark color="#FFF" size={52} />
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
+
             <div className="col-12" id={style.sectionIngredients}>
               <div className="container title-ingredients">
                 <h1>Ingredients</h1>
