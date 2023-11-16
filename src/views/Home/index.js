@@ -31,21 +31,21 @@ const Home = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const fetchRecipes = async (query, sortOption) => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/recipes/7`
-        );
-        setRecipes(response.data.data.rows[0]);
-        console.log(response.data.data.rows[0]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchRecipes = async (query, sortOption) => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BACKEND_URL}/recipes/7`
+  //       );
+  //       setRecipes(response.data.data.rows[0]);
+  //       console.log(response.data.data.rows[0]);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchRecipes()
-  }, []);
+  //   fetchRecipes()
+  // }, []);
 
   const handleSearch = () => {
     dispatch(setInitialSearchQuery(searchQuery)); 
@@ -108,7 +108,7 @@ const Home = () => {
               <section id="leftPopular" className="col-12 col-lg-6">
                 <div className="container-fluid" id={style.fluid}>
                   <img
-                    src={recipes.image}
+                    src={Image2}
                     className="img-fluid"
                     style={{ width: "600px", height: "600px", objectFit: "cover", borderRadius: "10px" }}
                     alt=""
