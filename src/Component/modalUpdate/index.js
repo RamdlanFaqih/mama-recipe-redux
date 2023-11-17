@@ -55,12 +55,14 @@ function ModalUpdate() {
     const userUpdate = new FormData();
     userUpdate.append("name", user.name);
     userUpdate.append("image", saveImage);
+    console.log(userUpdate)
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/updateProfile/${userID}`,
         userUpdate
       );
       console.log(response);
+      console.log(response.data);
       handleClose();
     } catch (err) {
       console.log(err.message);
