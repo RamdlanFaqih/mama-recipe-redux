@@ -24,6 +24,7 @@ const AddRecipe = () => {
       ...data,
       [e.target.name]: value,
     });
+    console.log(data);
   };
   const handleUpload = (e) => {
     const uploader = e.target.files[0];
