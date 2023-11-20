@@ -3,6 +3,7 @@ import axios from "axios";
 import Navigation from "../../Component/Navigation/Nav1";
 import Footer from "../../Component/Footer/Footer";
 import Button from "../../Component/Button/Button";
+import Swal from 'sweetalert2'
 import "./app.css";
 
 const AddRecipe = () => {
@@ -48,6 +49,13 @@ const AddRecipe = () => {
       .post(`${process.env.REACT_APP_BACKEND_URL}/recipes/tambahproduct`, productData)
       .then((response) => {
         console.log(response);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Recipe Posted Successfully!',
+          showConfirmButton: false,
+          timer: 3000,
+        });
       })
       .catch((err) => {
         console.log(err.errorMessage);

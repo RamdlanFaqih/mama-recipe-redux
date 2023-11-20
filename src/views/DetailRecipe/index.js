@@ -7,18 +7,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaPlay } from "react-icons/fa6";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
-import { data } from "jquery";
 
 const DetailRecipe = () => {
   const { recipes_id } = useParams();
   const users_id = localStorage.getItem("userID");
   const [recipes, setRecipes] = useState("");
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(
+    localStorage.getItem(`isLiked_${recipes_id}`) === "true"
+  );
   const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(recipes_id);
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
@@ -30,9 +30,11 @@ const DetailRecipe = () => {
         console.log("Failed to get recipes:", error);
       }
     };
-
+  
     fetchRecipes();
-  }, [recipes_id]);
+    setIsLiked(localStorage.getItem(`isLiked_${recipes_id}_${users_id}`) === "true");
+  }, [recipes_id, users_id]);
+  
 
   const handleVideo = () => {
     console.log("handleVideo is called");
@@ -41,35 +43,64 @@ const DetailRecipe = () => {
 
   const handleLike = async () => {
     console.log(users_id);
+    console.log(recipes_id);
     try {
       if (isLiked) {
         const response = await axios.delete(
-          `${process.env.REACT_APP_BACKEND_URL}/liked/${users_id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/liked/unlike/${users_id}`,
           {
             data: {
               recipes_id: recipes_id,
-              users_id: users_id,
             },
           }
         );
-        console.log("Unliked Recipe", response.data);
+        console.log("Unliked Recipe", response);
       } else {
         const response = await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/liked/${users_id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/liked/insert/${users_id}`,
           {
             recipes_id: recipes_id,
-            users_id: users_id,
           }
         );
-        console.log("Liked Recipe", response.data);
+        console.log("Liked Recipe", response);
       }
+
+      // Update state after successful API call
       setIsLiked(!isLiked);
+
+      // Update local storage
+      localStorage.setItem(`isLiked_${recipes_id}`, (!isLiked).toString());
     } catch (error) {
-      console.log("Error Like/Unlike");
+      console.log("Error Like/Unlike", error);
     }
   };
-  const handleSave = () => {
-    setIsSaved(!isSaved);
+  const handleSave = async () => {
+    console.log(users_id);
+    console.log(recipes_id);
+    try{
+      if (isSaved) {
+        const response = await axios.delete(
+          `${process.env.REACT_APP_BACKEND_URL}/saved/unsaved/${users_id}`,
+          {
+            recipes_id: recipes_id
+          }
+        );
+        console.log("Unsave Recipe", response);
+      } else {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/saved/insert/${users_id}`,
+          {
+            recipes_id: recipes_id,
+          }
+        );
+        console.log("Saved Recipe", response);
+      }
+      setIsSaved(!isSaved);
+
+      localStorage.setItem(`isSaved_${recipes_id}`, (!isSaved).toString());
+    } catch(error) {
+      console.log("Error Saved/Unsaved", error);
+    };
   };
 
   return (

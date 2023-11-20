@@ -1,5 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
+
+export const resetRegisterState = createAction("Register/resetRegisterState");
 
 export const registerAction = createAsyncThunk(
   "Register/registerUsers",
@@ -26,13 +28,12 @@ export const registerAction = createAsyncThunk(
         userData
       );
 
-      return { navigate }
+      return { navigate };
     } catch (error) {
-      return rejectWithValue("Add Recipe Error");
+      return rejectWithValue("Register Failed");
     }
   }
 );
-
 
 const registerSlice = createSlice({
   name: "registerUsers",
@@ -41,8 +42,16 @@ const registerSlice = createSlice({
     isSuccess: false,
     isError: false,
     errorMessage: "",
+    successMessage: "",
   },
   extraReducers: (builder) => {
+    builder.addCase(resetRegisterState, (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.errorMessage = "";
+      state.successMessage = "";
+    });
     builder.addCase(registerAction.pending, (state, action) => {
       state.isLoading = true;
       state.isSuccess = false;
@@ -52,10 +61,11 @@ const registerSlice = createSlice({
     builder.addCase(registerAction.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
+      state.successMessage = "Registration Succesful!";
       console.log(action.payload);
-      action.payload.navigate("/login"); 
+      action.payload.navigate("/login");
     });
-    
+
     builder.addCase(registerAction.rejected, (state, action) => {
       state.isLoading = false;
       state.isSuccess = false;

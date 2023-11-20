@@ -63,6 +63,8 @@ function ModalUpdate() {
       );
       console.log(response);
       console.log(response.data);
+      window.location.reload();
+
       handleClose();
     } catch (err) {
       console.log(err.message);
@@ -73,7 +75,7 @@ function ModalUpdate() {
   return (
     <>
       <span variant="primary" onClick={handleShow}>
-        <img src={iconEdit} />
+        <img src={iconEdit} alt="edit" />
       </span>
       <form onSubmit={handleSubmit}>
         <Modal show={show} onHide={handleClose}>

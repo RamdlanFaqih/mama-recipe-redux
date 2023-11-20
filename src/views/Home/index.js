@@ -9,6 +9,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
 import Image1 from "../../assets/img/img1.svg";
 import Image2 from "../../assets/img/img2.svg";
+import Image3 from "../../assets/img/ramensoup.jpg"
 import ImgGrid1 from "../../assets/img/grid1-1.svg";
 import ImgGrid2 from "../../assets/img/grid1-2.svg";
 import ImgGrid3 from "../../assets/img/grid1-3.svg";
@@ -108,7 +109,7 @@ const Home = () => {
               <section id="leftPopular" className="col-12 col-lg-6">
                 <div className="container-fluid" id={style.fluid}>
                   <img
-                    src={Image2}
+                    src={Image3}
                     className="img-fluid"
                     style={{ width: "600px", height: "600px", objectFit: "cover", borderRadius: "10px" }}
                     alt=""
@@ -119,7 +120,7 @@ const Home = () => {
                 <div className="container-fluid">
                   <div>
                     <h1 className={style.titleContent}>
-                      {recipes.food_name}
+                      Ramen Soup
                     </h1>
                   </div>
                   <div className="description">

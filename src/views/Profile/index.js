@@ -6,11 +6,14 @@ import style from "./profile.module.css";
 import ModalUpdate from "../../Component/modalUpdate/index";
 import { FaTrash } from "react-icons/fa";
 import DeleteConfirmationModal from "../../Component/ModalDelete";
+import { error } from "jquery";
 
 const Profile = () => {
   const [user, setUser] = React.useState("");
   const [recipesId, setRecipesId] = React.useState(null);
   const [recipes, setRecipes] = React.useState([]);
+  const [savedRecipes, setSavedRecipes] = React.useState([]);
+  const [likedRecipe, setLikedRecipe] = React.useState([]);
   const [showModal, setShowModal] = React.useState(false);
   const userID = localStorage.getItem("userID");
   console.log(userID);
@@ -21,14 +24,24 @@ const Profile = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/users/recipes/${userID}`
         );
-        console.log(response.data.rows);
         setUser(response.data.rows[0]);
 
         const recipesResponse = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/recipes/users/${userID}`
         );
-        console.log(recipesResponse.data.data.rows);
         setRecipes(recipesResponse.data.data.rows);
+
+        const savedResponse = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/saved/users/${userID}`
+        );
+        console.log(savedResponse.data.message.rows);
+        setSavedRecipes(savedResponse.data.message.rows);
+
+        const likedResponse = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/liked/users/${userID}`
+        );
+        console.log(likedResponse.data.message.rows);
+        setLikedRecipe(likedResponse.data.message.rows);
       } catch (error) {
         console.error("Failed to fetch user:", error);
       }
@@ -59,6 +72,22 @@ const Profile = () => {
       setShowModal(false);
     } catch (error) {
       console.error("Failed to delete recipe:", error);
+    }
+  };
+  const handleUnsave = async () => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/saved/unsaved/${userID}`
+      );
+
+      const updateSaved = savedRecipes.filter(
+        (savedRecipes) => savedRecipes.recipes_id !== userID
+      );
+      setSavedRecipes(updateSaved);
+
+      setShowModal(false);
+    } catch (eror) {
+      console.log("Failed unsave", error);
     }
   };
 
@@ -121,12 +150,6 @@ const Profile = () => {
                         </div>
                       ))}
                     </div>
-
-                    <DeleteConfirmationModal
-                      show={showModal}
-                      onHide={() => setShowModal(false)}
-                      onConfirm={handleDelete}
-                    />
                   </div>
                 </div>
               </div>
@@ -148,9 +171,28 @@ const Profile = () => {
                   className="accordion-collapse collapse"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <div className="accordion-body">
-                    Placeholder content for this accordion, which is intended to
-                    demonstrate the <code>.accordion-flush</code> class.
+                  <div className="accordion-body row">
+                    <div className="row row-cols-1 row-cols-lg-3 g-4">
+                      {savedRecipes.map((saved) => (
+                        <div className="col" key={saved.recipes_id}>
+                          <div className={style.recipesContainer}>
+                            <span className={style.deleteIcon}>
+                              <FaTrash
+                                onClick={() => handleUnsave(saved.recipes_id)}
+                              />
+                            </span>
+                            <img
+                              src={saved.image}
+                              alt="savedRecipe"
+                              className={style.recipes}
+                            />
+                            <h1 className={style.foodName}>
+                              {saved.food_name}
+                            </h1>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,19 +215,36 @@ const Profile = () => {
                   className="accordion-collapse collapse"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <div className="accordion-body">
-                    Placeholder content for this accordion, which is intended to
-                    demonstrate the <code>.accordion-flush</code> class. This is
-                    the third item's accordion body. Nothing more exciting
-                    happening here in terms of content, but just filling up the
-                    space to make it look, at least at first glance, a bit more
-                    representative of how this would look in a real-world
-                    application.
+                  <div className="accordion-body row">
+                    <div className="row row-cols-1 row-cols-lg-3 g-4">
+                      {likedRecipe.map((liked) => (
+                        <div className="col" key={liked.recipes_id}>
+                          <div className={style.recipesContainer}>
+                            <span className={style.deleteIcon}>
+                              <FaTrash />
+                            </span>
+                            <img
+                              src={liked.image}
+                              alt="likedRecipe"
+                              className={style.recipes}
+                            />
+                            <h1 className={style.foodName}>
+                              {liked.food_name}
+                            </h1>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <DeleteConfirmationModal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            onConfirm={handleDelete}
+          />
         </div>
       </div>
 

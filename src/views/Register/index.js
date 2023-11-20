@@ -1,23 +1,22 @@
 import React from "react";
-import { registerAction } from "../../redux/reducer/registerSlice";
-import { useDispatch } from "react-redux";
+import { registerAction, resetRegisterState } from "../../redux/reducer/registerSlice";
+import { useDispatch, useSelector } from "react-redux";
 import BgLeft from "../../Component/BgLeft/BgLeft";
 import Form from "../../Component/Form/Form";
 import Button from "../../Component/Button/Button";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./register.css";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const registerState = useSelector((state) => state.register);
   const [data, setData] = React.useState({
     name: "",
     email_address: "",
     phone_number: "",
     password: "",
   });
-  const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
-  const [showErrorAlert, setShowErrorAlert] = React.useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -29,9 +28,13 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     dispatch(registerAction({ data, navigate }));
-  };  
+
+    setTimeout(() => {
+      dispatch(resetRegisterState());
+    }, 3000)
+  };
   return (
     <React.Fragment>
       <div className="container-fluid">
@@ -100,6 +103,14 @@ const Register = () => {
                   </p>
                 </div>
               </form>
+              {registerState.isSuccess && (
+                <div className="alert alert-success" role="alert">
+                  {registerState.successMessage}
+                </div>
+              )}
+              {registerState.isError && (
+                <div className="alert alert-danger" role="alert">{registerState.errorMessage}</div>
+              )}
             </section>
           </div>
         </div>

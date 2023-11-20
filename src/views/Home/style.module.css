@@ -44,6 +44,12 @@
 }
 
 /* Media queries for responsiveness */
+
+@media (max-width: 1440px) {
+  .bg {
+    height: 100vh;
+  }
+}
 @media (max-width: 1200px) {
   .heroTitle {
     font-size: 60px;
