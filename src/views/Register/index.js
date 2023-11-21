@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BgLeft from "../../Component/BgLeft/BgLeft";
 import Form from "../../Component/Form/Form";
 import Button from "../../Component/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./register.css";
 
 const Register = () => {
@@ -46,7 +46,7 @@ const Register = () => {
             <section id="register">
               <div className="welcome">
                 <h2>Welcome</h2>
-                <p>Log in into your excisting account</p>
+                <p>Your culinary journey begins here. Register to explore more.</p>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="wrapper-form">
@@ -89,6 +89,17 @@ const Register = () => {
                     onChange={handleChange}
                   />
                 </div>
+                <div className="check">
+                  <input
+                    className="checkInput"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                  <label className="checkLabel" htmlFor="flexCheckDefault">
+                    I agree to terms & conditions
+                  </label>
+                </div>
                 <div className="button d-grid">
                   <Button
                     buttonName="Register Account"
@@ -99,7 +110,10 @@ const Register = () => {
                 </div>
                 <div className="sign-up">
                   <p>
-                    Already Have account?<a href="#">Log In Here</a>
+                    Already Have account?
+                    <Link className="navLink" to="/login">
+                    Log In Here
+                  </Link>
                   </p>
                 </div>
               </form>
