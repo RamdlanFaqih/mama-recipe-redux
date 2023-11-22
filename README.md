@@ -133,6 +133,20 @@ Mama Recipe is a website that allows users to share recipes and watch cooking tu
 <img src="screenshots/MyRecipe.png" alt="Landing Page" />
 </details>
 
+<details>
+  <summary>
+    Profile Saved Recipe Section
+  </summary>
+<img src="screenshots/SavedRecipe.png" alt="Landing Page" />
+</details>
+
+<details>
+  <summary>
+    Profile Liked Recipe Section
+  </summary>
+<img src="screenshots/LikedRecipe.png" alt="Landing Page" />
+</details>
+
 ## Built With
 
 - **React JS**: Primary library for building dynamic and responsive user interface components.
