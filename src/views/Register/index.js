@@ -46,7 +46,7 @@ const Register = () => {
             <section id="register">
               <div className="welcome">
                 <h2>Welcome</h2>
-                <p>Your culinary journey begins here. Register to explore more.</p>
+                <p>Your culinary journey begins here. <br/> Register to explore more.</p>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="wrapper-form">
