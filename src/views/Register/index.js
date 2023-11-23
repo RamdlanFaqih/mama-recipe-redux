@@ -90,13 +90,14 @@ const Register = () => {
                   />
                 </div>
                 <div className="check">
-                  <input
-                    className="checkInput"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label className="checkLabel" htmlFor="flexCheckDefault">
+
+                  <label className="checkLabel my-2" htmlFor="flexCheckDefault">
+                    <input
+                        className="checkInput"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckDefault"
+                    />
                     I agree to terms & conditions
                   </label>
                 </div>
@@ -111,7 +112,7 @@ const Register = () => {
                 <div className="sign-up">
                   <p>
                     Already Have account?
-                    <Link className="navLink" to="/login">
+                    <Link className="navLink ms-2" to="/login">
                     Log In Here
                   </Link>
                   </p>

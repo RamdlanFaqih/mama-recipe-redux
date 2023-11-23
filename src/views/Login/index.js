@@ -63,7 +63,7 @@ const Login = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="container-fluid">
         <div className="row align-items-center">
           <div id="left-section" className="col-sm-12 col-md-4 col-lg-6">
@@ -97,13 +97,14 @@ const Login = () => {
                   />
                 </div>
                 <div className="check">
-                  <input
-                    className="checkInput"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label className="checkLabel" htmlFor="flexCheckDefault">
+
+                  <label className="checkLabel my-2 " htmlFor="flexCheckDefault">
+                    <input
+                        className="checkInput"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckDefault"
+                    />
                     I agree to terms & conditions
                   </label>
                 </div>
@@ -127,8 +128,8 @@ const Login = () => {
               <div className="sign-up">
                 <p>
                   Don't Have an account?
-                  <Link className="navLink" to="/register">
-                    Register
+                  <Link className="navLink ms-2" to="/register">
+                     Register
                   </Link>
                 </p>
               </div>
@@ -136,7 +137,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
