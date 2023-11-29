@@ -34,13 +34,13 @@ const Profile = () => {
         const savedResponse = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/saved/users/${userID}`
         );
-        console.log(savedResponse.data.message.rows);
+        console.log("saved recipe", savedResponse.data.message.rows);
         setSavedRecipes(savedResponse.data.message.rows);
 
         const likedResponse = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/liked/users/${userID}`
         );
-        console.log(likedResponse.data.message.rows);
+        console.log("liked recipe", likedResponse.data.message.rows);
         setLikedRecipe(likedResponse.data.message.rows);
       } catch (error) {
         console.error("Failed to fetch user:", error);
@@ -182,7 +182,7 @@ const Profile = () => {
                               />
                             </span>
                             <img
-                              src={saved.image}
+                              src={saved.recipe_image}
                               alt="savedRecipe"
                               className={style.recipes}
                             />
@@ -224,7 +224,7 @@ const Profile = () => {
                               <FaTrash />
                             </span>
                             <img
-                              src={liked.image}
+                              src={liked.recipe_image}
                               alt="likedRecipe"
                               className={style.recipes}
                             />

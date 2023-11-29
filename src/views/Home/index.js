@@ -32,21 +32,6 @@ const Home = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const fetchRecipes = async (query, sortOption) => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BACKEND_URL}/recipes/7`
-  //       );
-  //       setRecipes(response.data.data.rows[0]);
-  //       console.log(response.data.data.rows[0]);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchRecipes()
-  // }, []);
 
   const handleSearch = () => {
     dispatch(setInitialSearchQuery(searchQuery)); 

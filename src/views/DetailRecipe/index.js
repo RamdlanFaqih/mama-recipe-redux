@@ -64,11 +64,7 @@ const DetailRecipe = () => {
         );
         console.log("Liked Recipe", response);
       }
-
-      // Update state after successful API call
       setIsLiked(!isLiked);
-
-      // Update local storage
       localStorage.setItem(`isLiked_${recipes_id}`, (!isLiked).toString());
     } catch (error) {
       console.log("Error Like/Unlike", error);
